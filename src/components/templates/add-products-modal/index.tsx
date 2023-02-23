@@ -8,6 +8,9 @@ import useQueryFilters from "../../../hooks/use-query-filters"
 import { columns, ProductHeader, ProductRow } from "./product-table-config"
 import { mapIdsToItems } from "./utils"
 
+import Metadata, { MetadataField } from "../../organisms/metadata"
+
+
 const defaultQueryProps = {
   limit: 12,
   offset: 0,
@@ -42,6 +45,7 @@ const AddProductsModal = ({
   /* selectedItems hold the selected products across different pages */
   const [selectedItems, setSelectedItems] = React.useState(initialSelection)
 
+  const [metadata, setMetadata] = React.useState<MetadataField[]>([])
   React.useEffect(() => {
     /**
      * Every time we select an id is selected, we should update the selectedItems
@@ -82,6 +86,9 @@ const AddProductsModal = ({
               {...params}
             />
           </div>
+          <div className="mt-xlarge w-full">
+              <Metadata setMetadata={setMetadata} metadata={metadata} />
+            </div>
         </Modal.Content>
         <Modal.Footer>
           <div className="w-full flex justify-end gap-2">
